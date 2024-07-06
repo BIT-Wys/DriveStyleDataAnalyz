@@ -3,11 +3,11 @@ import pandas as pd
 
 
 def IdentifyDrivingState(vehicle_data):
-    vehicle_data = vehicle_data.sort_values('Frame_ID')  # 确保数据是按帧排序的
+    vehicle_data = vehicle_data.sort_values('Second')  # 确保数据是按帧排序的
     vehicle_data['Driving_State'] = 'Cruising'  # 默认为巡航
     # 计算速度
-    velocity = np.hypot(vehicle_data['x_Velocity'], vehicle_data['y_Velocity'])
-
+    vehicle_data['Velocity'] = np.hypot(vehicle_data['x_Velocity'], vehicle_data['y_Velocity'])
+    vehicle_data['Following_Distance'] = vehicle_data['Space_headway']
     # 检测跟车状态 50米内有前车；两车间时距3s内差值在0.5s以内
     following_condition = (vehicle_data['Time_headway'] < 3) & (
         vehicle_data['Space_headway'] < 50) & (vehicle_data['Time_headway'] > 0)
@@ -19,7 +19,7 @@ def IdentifyDrivingState(vehicle_data):
 
     # 输出统计信息查看变道和巡航的帧数量
 
-    print(vehicle_data['Driving_State'].value_counts())
+    # print(vehicle_data['Driving_State'].value_counts())
     return vehicle_data
 
 
