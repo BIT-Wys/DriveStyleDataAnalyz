@@ -12,7 +12,7 @@ def ReadTable():
     data_frames = []
     loaded_data = 0
     # 循环读取每个文件，并将其数据框架追加到列表
-    for file_name in file_list[:600]:  # 限制为前500个文件，如果文件夹中文件少于500，将读取所有文件
+    for file_name in file_list[:30]:  # 限制为前500个文件，如果文件夹中文件少于500，将读取所有文件
         current_file_path = os.path.join(folder_path, file_name)
         current_data_frame = pd.read_csv(current_file_path)
 

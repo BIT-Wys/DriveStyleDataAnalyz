@@ -17,8 +17,8 @@ def get_follow_vehicle_data(vehicle_data, vehicle_frames):
                 # 如果时间戳匹配，则获取前车的速度和空间位置
                 vehicle_data.at[index,
                                 'Following_Velocity'] = near_vehicle_data.iloc[idx]['Velocity']
-                vehicle_data.at[index,
-                                'Following_Distance'] = near_vehicle_data.iloc[idx]['Space_headway']
+                # vehicle_data.at[index,
+                #                 'Following_Distance'] = near_vehicle_data.iloc[idx]['Space_headway']
             elif idx > 0:
                 # 如果没有精确匹配，使用最接近的前一个数据点
                 vehicle_data.at[index,
@@ -46,14 +46,14 @@ def get_preceed_vehicle_data(vehicle_data, vehicle_frames):
             if idx < len(near_vehicle_data) and near_vehicle_data.iloc[idx]['Second'] == current_second:
                 # 如果时间戳匹配，则获取前车的速度和空间位置
                 vehicle_data.at[index,
-                                'Preceeding_Velocity'] = near_vehicle_data.iloc[idx]['Velocity']
+                                'Preceding_Velocity'] = near_vehicle_data.iloc[idx]['Velocity']
                 vehicle_data.at[index,
-                                'Preceeding_Velocity'] = near_vehicle_data.iloc[idx]['Space_headway']
+                                'Preceding_Distance'] = near_vehicle_data.iloc[idx]['Space_headway']
             elif idx > 0:
                 # 如果没有精确匹配，使用最接近的前一个数据点
                 vehicle_data.at[index,
-                                'Preceeding_Velocity'] = near_vehicle_data.iloc[idx - 1]['Velocity']
+                                'Preceding_Velocity'] = near_vehicle_data.iloc[idx - 1]['Velocity']
                 vehicle_data.at[index,
-                                'Preceeding_Distance'] = near_vehicle_data.iloc[idx - 1]['Space_headway']
+                                'Preceding_Distance'] = near_vehicle_data.iloc[idx - 1]['Space_headway']
 
     return vehicle_data
