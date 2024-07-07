@@ -2,7 +2,7 @@ import os
 import pandas as pd
 
 
-def ReadTable():
+def ReadTable(start_idx, interval):
     # 定义包含 CSV 文件的文件夹路径
     folder_path = './rl1'  # 替换为你的文件夹路径
     # 获取文件夹中所有 CSV 文件的信息
@@ -12,7 +12,7 @@ def ReadTable():
     data_frames = []
     loaded_data = 0
     # 循环读取每个文件，并将其数据框架追加到列表
-    for file_name in file_list[:30]:  # 限制为前500个文件，如果文件夹中文件少于500，将读取所有文件
+    for file_name in file_list[start_idx:start_idx + interval]:  # 限制为前500个文件，如果文件夹中文件少于500，将读取所有文件
         current_file_path = os.path.join(folder_path, file_name)
         current_data_frame = pd.read_csv(current_file_path)
 
